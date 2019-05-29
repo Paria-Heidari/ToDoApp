@@ -7,7 +7,7 @@
  */
 import React from 'react';
 import Main from './components/Main';
-// import Note from './app/components/Note';
+// import Note from './components/Note';
 
  export default class ToDoApp extends React.Component {
      render() {
