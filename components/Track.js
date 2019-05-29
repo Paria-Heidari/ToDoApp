@@ -21,7 +21,6 @@ export default class Track extends React.Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   note: {
         position: 'relative',
