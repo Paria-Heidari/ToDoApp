@@ -12,7 +12,7 @@ import Main from './components/Main';
  export default class ToDoApp extends React.Component {
      render() {
          return (
-                    <Main />
+                  <Main />
         );
     }
 }
