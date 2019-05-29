@@ -10,24 +10,44 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-// import Note from './Note';
+import Track from './Track';
 const isAndroid = Platform.OS == "android";
 
 
 export default class Main extends React.Component {
-
-    constructor(props){
-        super(props);
+    constructor (props) {
+        super (props) ;
         this.state = {
-        noteArray: [] ,
-        noteText: ' ' ,
+            noteArray: [ ] ,
+            noteText : ' '
         }
+        this.addNote = this.addNote.bind (this) ;
+        this.deleteNote = this.deleteNote.bind (this) ;
     }
     addNote() {
-    Alert.alert('You tapped the button!')
+        if (this.state.noteText) {
+            let d = new Date ( ) ;
+            this.state.noteArray.push ({
+                'date' : d.getFullYear() +
+                "/" + (d.getMonth() + 1) +
+                "/" + d.getDate() ,
+                note : this.state.noteText
+            });
+
+            this.setState({ noteArray: this.state.noteArray })
+            this.setState({ noteText: ' ' });
+        }
+    }
+    deleteNote(key){
+            this.state.noteArray.splice(key, 1);
+            this.setState({noteArray: this.state.noteArray })
     }
 
     render() {
+        let notes = this.state.noteArray.map((val, key) =>{
+            return <Track key={key} keyval={key} val={val}
+                         deleteMethod={()=>this.deleteNote(key)}></Track>
+        });
 
         return (
             <View style={styles.container}>
@@ -36,28 +56,27 @@ export default class Main extends React.Component {
                 </View>
 
                 <ScrollView style={styles.scrollcontainer} >
-
+                    {notes}
                 </ScrollView>
 
                 <View style={styles.footer}>
 
                         <TextInput
                                 style={styles.textInput}
-                                placeholder= 'note'
-                                placeholderTextColor = '#fff'>
+                                placeholder= 'Enter your Task'
+                                placeholderTextColor = '#fff'
+                                onChangeText = {(noteText) => this.setState({noteText})}
+                                value={this.state.noteText}>
                         </TextInput>
-
                 </View>
-
                     <TouchableOpacity onPress={ this.addNote.bind(this)} style={styles.addButton}>
                         <Text style={styles.addButtonText} >+</Text>
                     </TouchableOpacity>
-
-
             </View>
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -110,7 +129,7 @@ const styles = StyleSheet.create({
         bottom: 40,
         left: 130,
         right: 0,
-        zIndex: 11,
+        // zIndex: 11,
         backgroundColor: '#C4D5C4',
         width: 70,
         height: 70,

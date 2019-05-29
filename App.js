@@ -6,7 +6,7 @@
  * @flow
  */
 import React from 'react';
-import Main from './app/components/Main';
+import Main from './components/Main';
 // import Note from './app/components/Note';
 
  export default class ToDoApp extends React.Component {
