@@ -28,9 +28,9 @@ export default class Main extends React.Component {
         if (this.state.noteText) {
             let d = new Date ( ) ;
             this.state.noteArray.push ({
-                'date' : d.getFullYear() +
-                "/" + (d.getMonth() + 1) +
-                "/" + d.getDate() ,
+                'date' : d.getDate() +
+                "." + (d.getMonth() + 1) +
+                "." + d.getFullYear() ,
                 note : this.state.noteText
             });
 
